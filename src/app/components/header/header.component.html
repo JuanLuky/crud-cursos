@@ -1,0 +1,12 @@
+<mat-toolbar class="header">
+  <div class="container">
+    <img src="../../../assets/image/logo.png" alt="logo">
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>About</button>
+      <button mat-menu-item>Contat</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

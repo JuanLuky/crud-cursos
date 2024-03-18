@@ -1,0 +1,39 @@
+@import '_variables';
+
+.container {
+  margin: 0 auto;
+  margin-top: 30px;
+  max-width: 1080px;
+  width: 90%;
+
+  .table-container {
+    th {
+      color: #a7a7a7;
+    }
+    td {
+      color: $gray-200;
+    }
+  }
+
+  table {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .example-form {
+    min-width: 300px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  .header {
+    background-color: $gray-700;
+    color: $gray-200;
+  }
+
+  .spinner {
+    margin: 20px auto 50px auto;
+  }
+}

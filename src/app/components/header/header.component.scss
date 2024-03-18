@@ -1,0 +1,19 @@
+@import '_variables';
+
+.header {
+  background-color: $red;
+
+  .container {
+    margin: auto;
+    max-width: 1080px;
+    width: 94%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  img {
+    width: 120px;
+  }
+}
+
