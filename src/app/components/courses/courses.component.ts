@@ -6,15 +6,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { AsyncPipe } from '@angular/common';
+import { ErrorComponent } from '../../shared/error/error.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [ MatTableModule, MatCardModule, MatInputModule, MatFormFieldModule, FormsModule, MatToolbarModule,MatProgressSpinnerModule, AsyncPipe],
+  imports: [ MatTableModule, MatCardModule, MatInputModule, MatFormFieldModule, FormsModule, MatToolbarModule,MatProgressSpinnerModule, AsyncPipe, ErrorComponent],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss'
 })
@@ -24,7 +26,21 @@ export class CoursesComponent {
 
   private coursesService = inject(CoursesService);
 
-  constructor() {
-    this.courses$ = this.coursesService.list();
+  constructor( public dialog: MatDialog ) {
+    this.courses$ = this.coursesService.list()
+    .pipe(
+      catchError(error => {
+        this.onError('');
+        return of([]);
+      })
+    );
+  }
+
+  onError( errorMsg: string) {
+    this.dialog.open(ErrorComponent, {
+      data: {
+        error: errorMsg,
+      },
+    });
   }
 }

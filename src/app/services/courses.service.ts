@@ -9,7 +9,7 @@ import { delay, first, tap } from 'rxjs';
 export class CoursesService {
 
   private http = inject(HttpClient);
-  private readonly URL_API = '../../assets/courses.json';
+  private readonly URL_API = '../../assets/courses.jsons';
 
   constructor() { }
 
@@ -18,7 +18,6 @@ export class CoursesService {
     .pipe(
       first(),
       delay(2000),
-      tap( courses => console.log(courses))
     );
   }
 }
