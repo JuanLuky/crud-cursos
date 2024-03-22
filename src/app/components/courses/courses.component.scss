@@ -36,4 +36,25 @@
   .spinner {
     margin: 20px auto 50px auto;
   }
+
+  mat-header-cell {
+    height: 60px !important;
+  }
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  .edit {
+    color: #ebba18;
+  }
+  .btn-new {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
+
+    :hover {
+      transform: scale(1.2);
+    }
+  }
 }
