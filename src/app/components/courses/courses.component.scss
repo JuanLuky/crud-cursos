@@ -43,6 +43,7 @@
   .actions {
     display: flex;
     gap: 10px;
+    justify-content: flex-end;
   }
   .edit {
     color: #ebba18;
@@ -51,7 +52,7 @@
     position: fixed;
     bottom: 0;
     right: 0;
-    margin: 30px;
+    margin: 25px 40px;
 
     :hover {
       transform: scale(1.2);
