@@ -1,0 +1,49 @@
+@import '_variables';
+
+.container {
+  padding: 10px 0 20px 0;
+  max-width: 1080px;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 40px;
+
+  form {
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 26px;
+  }
+  .title {
+    color: $gray-100;
+    padding: 0 5px;
+    font-size: 1.5rem;
+  }
+
+  .label-text {
+    color: #c9c9c9;
+  }
+
+  .btn-content {
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  button {
+    padding: 16px 20px;
+    background-color: $red !important;
+  }
+  .btn-cancel {
+    background-color: #666666 !important;
+  }
+}
+
+@media (max-width: 500px) {
+  button {
+    padding: 20px 20px !important;
+    flex: 1;
+  }
+}

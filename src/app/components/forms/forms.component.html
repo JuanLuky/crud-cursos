@@ -1,1 +1,36 @@
-<p>forms works!</p>
+<mat-card class="container">
+  <mat-card-header>
+    <mat-card-title class="title">Cria um novo curso</mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label class="label-text">Nome</mat-label>
+      <input matInput formControlName="name" />
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label class="label-text">Categoria</mat-label>
+      <mat-select formControlName="category">
+        @for (list of lists; track list) {
+          <mat-option [value]="list.value">{{list.viewValue}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label class="label-text">Linguagem</mat-label>
+      <mat-select formControlName="language">
+        @for (language of languages; track language) {
+          <mat-option [value]="language.value">{{language.viewValue}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <mat-card-actions class="btn-content">
+    <button mat-raised-button (click)="onSubmit()">Salvar</button>
+    <button class="btn-cancel" mat-raised-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Course } from '../model/course';
 import { HttpClient } from '@angular/common/http';
-import { delay, first, tap } from 'rxjs';
+import { delay, first } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -17,6 +17,13 @@ export class CoursesService {
     .pipe(
       first(),
       delay(2000),
+    );
+  }
+
+  save(record: Course) {
+    return this.http.post<Course[]>(this.URL_API, record)
+    .pipe(
+      first(),
     );
   }
 }

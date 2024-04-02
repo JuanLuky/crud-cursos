@@ -2,14 +2,6 @@
   <mat-card>
     <mat-toolbar class="header"> Cursos Disponíveis </mat-toolbar>
 
-    <!-- <mat-card-content class="input-content">
-      <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Search" />
-        </mat-form-field>
-      </form>
-    </mat-card-content> -->
-
     @if(courses$ | async; as courses) {
     <table
       mat-table

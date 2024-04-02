@@ -2,9 +2,11 @@
 
 .container {
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 40px;
   max-width: 1080px;
-  width: 90%;
+  width: 95%;
+  border-radius: 5px !important;
+  overflow: hidden;
 
   .table-container {
     th {
