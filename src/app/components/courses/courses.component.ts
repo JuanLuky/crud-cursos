@@ -19,22 +19,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [ MatTableModule, MatCardModule, MatInputModule, MatFormFieldModule, FormsModule, MatToolbarModule,MatProgressSpinnerModule, AsyncPipe, ErrorComponent, MatButtonModule, MatIconModule],
+  imports: [
+    MatTableModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    AsyncPipe,
+    ErrorComponent,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './courses.component.html',
-  styleUrl: './courses.component.scss'
+  styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
   courses$: Observable<Course[]>;
-  displayedColumns = ['name', 'category', 'language', 'actions']
+  displayedColumns = ['name', 'category', 'language', 'actions'];
 
   private coursesService = inject(CoursesService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  constructor( public dialog: MatDialog) {
-    this.courses$ = this.coursesService.list()
-    .pipe(
-      catchError(error => {
+  constructor(public dialog: MatDialog) {
+    this.courses$ = this.coursesService.list().pipe(
+      catchError((error) => {
         this.onError('');
         return of([]);
       })
@@ -42,10 +53,13 @@ export class CoursesComponent {
   }
 
   onAdd() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
+  onEdit(course: Course) {
+    this.router.navigate(['edit', course._id], { relativeTo: this.route });
   }
 
-  onError( errorMsg: string) {
+  onError(errorMsg: string) {
     this.dialog.open(ErrorComponent, {
       data: {
         error: errorMsg,

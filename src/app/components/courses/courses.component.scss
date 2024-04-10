@@ -4,17 +4,26 @@
   margin: 0 auto;
   margin-top: 40px;
   max-width: 1080px;
-  width: 95%;
+  width: 96%;
   border-radius: 5px !important;
   overflow: hidden;
 
   .table-container {
     th {
       color: #a7a7a7;
+
+      @media (max-width: 500px) {
+        font-size: 11px;
+      }
     }
     td {
       color: $gray-200;
+
+      @media (max-width: 500px) {
+        font-size: 11px;
+      }
     }
+
   }
 
   table {
@@ -33,6 +42,10 @@
   .header {
     background-color: $gray-700;
     color: $gray-200;
+
+    @media (max-width: 500px) {
+      font-size: 18px;
+    }
   }
 
   .spinner {
@@ -43,9 +56,17 @@
     height: 60px !important;
   }
   .actions {
+    height: 62px !important;
     display: flex;
     gap: 10px;
     justify-content: flex-end;
+
+    @media (max-width: 500px) {
+      height: 62px !important;
+      justify-content: flex-start;
+      margin-left: -30px;
+      gap: 0;
+    }
   }
   .edit {
     color: #ebba18;
