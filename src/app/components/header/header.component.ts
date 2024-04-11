@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,5 +13,11 @@ import {MatMenuModule} from '@angular/material/menu';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
+  onCancela() {
+    this.router.navigate(['courses'], { relativeTo: this.route });
+  }
 
 }

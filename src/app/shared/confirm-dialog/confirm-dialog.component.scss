@@ -1,0 +1,17 @@
+@import '_variables.scss';
+
+
+.btn {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+
+  .primary {
+    background-color: green;
+  }
+  .secundary {
+    background-color: $red;
+  }
+}

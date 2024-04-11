@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,6 +27,7 @@ import { Course } from '../../model/course';
   styleUrl: './forms.component.scss',
 })
 export class FormsComponent {
+
   lists: List[] = [
     { value: 'Front-end', viewValue: 'Front-end' },
     { value: 'Back-end', viewValue: 'Back-end' },
