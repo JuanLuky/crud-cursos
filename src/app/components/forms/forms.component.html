@@ -7,6 +7,9 @@
     <mat-form-field>
       <mat-label class="label-text">Nome</mat-label>
       <input matInput formControlName="name" />
+      @if (form.get('name')?.invalid) {
+        <mat-error>{{errorMessage("name")}}</mat-error>
+      }
 
     </mat-form-field>
 
@@ -17,20 +20,14 @@
           <mat-option [value]="list.value">{{list.viewValue}}</mat-option>
         }
       </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label class="label-text">Linguagem</mat-label>
-      <mat-select formControlName="language">
-        @for (language of languages; track language) {
-          <mat-option [value]="language.value">{{language.viewValue}}</mat-option>
-        }
-      </mat-select>
+      @if (form.get('category')?.invalid) {
+        <mat-error>{{errorMessage("category")}}</mat-error>
+      }
     </mat-form-field>
   </form>
 
   <mat-card-actions class="btn-content">
-    <button mat-raised-button (click)="onSubmit()">Salvar</button>
+    <button [disabled]="form.invalid"  mat-raised-button (click)="onSubmit()">Salvar</button>
     <button class="btn-cancel" mat-raised-button (click)="onCancel()">Cancelar</button>
   </mat-card-actions>
 </mat-card>

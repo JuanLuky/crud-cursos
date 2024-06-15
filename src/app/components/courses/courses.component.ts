@@ -38,8 +38,9 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
+
   courses$: Observable<Course[]> | null = null;
-  displayedColumns = ['name', 'category', 'language', 'actions'];
+  displayedColumns = ['name', 'category', 'actions'];
 
   private coursesService = inject(CoursesService);
   private router = inject(Router);
@@ -52,6 +53,15 @@ export class CoursesComponent {
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
+  onCopy(course: Course) {
+    const courseText = `${course.name}`;
+    navigator.clipboard.writeText(courseText).then(() => {
+      alert('Informações do curso copiadas para a área de transferência!');
+    }).catch(err => {
+      console.error('Erro ao copiar para a área de transferência: ', err);
+    });
+  }
+
   onEdit(course: Course) {
     this.router.navigate(['edit', course._id], { relativeTo: this.route });
   }
@@ -95,7 +105,5 @@ export class CoursesComponent {
     });
   }
 }
-function openDialog() {
-  throw new Error('Function not implemented.');
-}
+
 

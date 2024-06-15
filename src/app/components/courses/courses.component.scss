@@ -55,6 +55,9 @@
   mat-header-cell {
     height: 60px !important;
   }
+  .actions-text {
+    text-align: end;
+  }
   .actions {
     height: 62px !important;
     display: flex;
@@ -70,6 +73,9 @@
   }
   .edit {
     color: #ebba18;
+  }
+  .copy {
+    color: #1897eb;
   }
   .btn-new {
     position: fixed;

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 
-import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -29,31 +29,16 @@ import { Course } from '../../model/course';
 export class FormsComponent {
 
   lists: List[] = [
-    { value: 'Front-end', viewValue: 'Front-end' },
-    { value: 'Back-end', viewValue: 'Back-end' },
-    { value: 'DevOps', viewValue: 'DevOps' },
-    { value: 'Inteligência Artificial', viewValue: 'Inteligência Artificial' },
-  ];
-  languages: List[] = [
-    { value: 'TypeScript', viewValue: 'TypeScript' },
-    { value: 'Java', viewValue: 'Java' },
-    { value: 'JavaScript', viewValue: 'JavaScript' },
-    { value: 'Python', viewValue: 'Python' },
-    { value: 'Ruby', viewValue: 'Ruby' },
-    { value: 'C++', viewValue: 'C++' },
-    { value: 'C#', viewValue: 'C#' },
-    { value: 'SQL', viewValue: 'SQL' },
-    { value: 'Infraestrutura', viewValue: 'Infraestrutura' },
-    { value: 'IA', viewValue: 'IA' },
+    { value: 'Eletros 18:30', viewValue: 'Eletros 18:30' },
+    { value: 'Caminos 20:30', viewValue: 'Caminos 20:30' },
   ];
 
   private formBuilder = inject(NonNullableFormBuilder);
 
   form = this.formBuilder.group({
     _id: [''],
-    name: [''],
-    category: [''],
-    language: [''],
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    category: ['',[Validators.required]],
   });
 
   constructor(private snackBar: MatSnackBar) {
@@ -62,7 +47,6 @@ export class FormsComponent {
       _id: course._id,
       name: course.name,
       category: course.category,
-      language: course.language,
     });
   }
 
@@ -88,5 +72,17 @@ export class FormsComponent {
   }
   private onError() {
     this.snackBar.open('Erro ao salvar curso!', '', { duration: 3000 });
+  }
+
+  errorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+    if (field?.hasError('required')) {
+      return 'Campo obrigatório';
+    }
+    if (field?.hasError('minlength')) {
+      const requiredLength = field.errors ? field.errors['minlength']['requiredLength'] : 5 ;
+      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
+    }
+    return 'Campo Inválido';
   }
 }
