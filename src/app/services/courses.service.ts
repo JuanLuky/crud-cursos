@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class CoursesService {
   private http = inject(HttpClient);
   private readonly URL_API = `${environment.api}`;
-  private readonly URL_API_TEST = `${environment.apitest}`;
+  private readonly URL_API_TEST = `${environment.api_time}`;
 
   getProdutosPorCategoria(category: string): Observable<Course[]> {
     return this.http.get<Course[]>(`${this.URL_API_TEST}?category=${category}`).pipe(first(), delay(500));
