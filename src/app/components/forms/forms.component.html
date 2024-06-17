@@ -5,7 +5,7 @@
 
   <form [formGroup]="form">
     <mat-form-field>
-      <mat-label class="label-text">Nome</mat-label>
+      <mat-label class="label-text">Linha</mat-label>
       <input matInput formControlName="name" />
       @if (form.get('name')?.invalid) {
         <mat-error>{{errorMessage("name")}}</mat-error>
@@ -14,7 +14,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label class="label-text">Categoria</mat-label>
+      <mat-label class="label-text">Horário</mat-label>
       <mat-select formControlName="category">
         @for (list of lists; track list) {
           <mat-option [value]="list.value">{{list.viewValue}}</mat-option>

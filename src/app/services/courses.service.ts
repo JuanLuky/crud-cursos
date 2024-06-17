@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Course } from '../model/course';
 import { HttpClient } from '@angular/common/http';
-import { delay, first } from 'rxjs';
+import { Observable, delay, first } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -10,6 +10,11 @@ import { environment } from '../../environments/environment';
 export class CoursesService {
   private http = inject(HttpClient);
   private readonly URL_API = `${environment.api}`;
+  private readonly URL_API_TEST = `${environment.apitest}`;
+
+  getProdutosPorCategoria(category: string): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.URL_API_TEST}?category=${category}`).pipe(first(), delay(500));
+  }
 
   list() {
     return this.http.get<Course[]>(this.URL_API).pipe(first(), delay(500));

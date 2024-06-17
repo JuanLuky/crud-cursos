@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Observable, catchError, of } from 'rxjs';
 import { Course } from '../../model/course';
@@ -40,6 +40,7 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
 export class CoursesComponent {
 
   courses$: Observable<Course[]> | null = null;
+  courses20$: Observable<Course[]> | null = null;
   displayedColumns = ['name', 'category', 'actions'];
 
   private coursesService = inject(CoursesService);
@@ -66,9 +67,16 @@ export class CoursesComponent {
     this.router.navigate(['edit', course._id], { relativeTo: this.route });
   }
   refresh() {
-    this.courses$ = this.coursesService.list().pipe(
+    this.courses20$ = this.coursesService.getProdutosPorCategoria('Eletros 18h:30').pipe(
       catchError((error) => {
         this.onError('');
+        return of([]);
+      })
+    );
+
+    this.courses$ = this.coursesService.list().pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os cursos.');
         return of([]);
       })
     );
