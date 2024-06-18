@@ -1,52 +1,42 @@
 @import '_variables.scss';
 
 .container {
-  padding: 2px 10px 2px 20px;
+  width: 420px;
+  padding: 20px 30px 22px 30px;
   position: fixed;
   bottom: 0;
   left: 0;
   margin: 20px;
-  background-color: $red;
-  border-radius: 10px;
+  background-color: #f3c1c1;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.error-title {
-  margin-top: 8px;
-  font-size: 1.2rem;
-  color: $gray-100;
-  font-weight: bold;
-  letter-spacing: 1.6px;
-  font-family: monospace;
-  text-transform: uppercase;
-}
 .error-sub {
-  margin-top: -10px;
-  font-size: .68rem;
-  color: $gray-100;
+  text-align: start;
+  font-size: 1rem;
+  color: red;
   font-weight: bold;
   font-family: monospace;
   text-transform: uppercase;
 }
 
 .btn-close {
-  background-color: $gray-100;
+  background-color:transparent;
   border: none;
   outline: none;
-  color: $red;
+  color: red;
   font-weight: bold;
-  padding: 3px 8.4px;
-  text-align: center;
   text-decoration: none;
   line-height: 1.2;
-  font-size: 18px;
-  margin: 4px 2px;
+  font-size: 28px;
   cursor: pointer;
-  border-radius: 25px;
-  margin-top: -26px;
+
+  position: absolute;
+  top: 10px;
+  right: 20px;
+
 }
-.btn-close:hover {
-  background-color: $gray-1005;
-}
+
