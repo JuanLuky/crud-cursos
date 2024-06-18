@@ -28,14 +28,7 @@ import { Course } from '../../model/course';
 })
 export class FormsComponent {
 
-  lists: List[] = [
-    { value: 'Eletros 18h:30', viewValue: 'Eletros 18h:30' },
-    { value: 'Caminos e Carone 20h:30', viewValue: 'Caminos e Carone 20h:30' },
-    { value: 'Caminos e Carone 21h:00', viewValue: 'Caminos e Carone 21h:00' },
-    { value: 'Lojas as 21h:00 / 22h:00', viewValue: 'Lojas as 21h:00 / 22h:00' },
-    { value: 'Lojas as 23h:45', viewValue: 'Lojas as 23h:45' },
-    { value: 'Não Inauguradas 22h:00', viewValue: 'Não Inauguradas 22h:00' },
-  ];
+  lists: List[] = [];
 
   private formBuilder = inject(NonNullableFormBuilder);
 
@@ -46,6 +39,8 @@ export class FormsComponent {
   });
 
   constructor(private snackBar: MatSnackBar) {
+    this.lists = this.service.getLists();
+
     const course: Course = this.route.snapshot.data['course'];
     this.form.setValue({
       _id: course._id,

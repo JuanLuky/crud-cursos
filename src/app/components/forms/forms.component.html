@@ -17,7 +17,7 @@
       <mat-label class="label-text">Horário</mat-label>
       <mat-select formControlName="category">
         @for (list of lists; track list) {
-          <mat-option [value]="list.value">{{list.viewValue}}</mat-option>
+          <mat-option [value]="list.value">{{list.value}}</mat-option>
         }
       </mat-select>
       @if (form.get('category')?.invalid) {

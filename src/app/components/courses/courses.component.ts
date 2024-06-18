@@ -1,22 +1,23 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Observable, catchError, of } from 'rxjs';
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 import { AsyncPipe } from '@angular/common';
 import { ErrorComponent } from '../../shared/error/error.component';
-import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { List } from '../../model/select';
 
 @Component({
   selector: 'app-courses',
@@ -39,9 +40,18 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
 })
 export class CoursesComponent {
 
-  courses$: Observable<Course[]> | null = null;
-  courses20$: Observable<Course[]> | null = null;
+  // TODAS GET LINHAS
+  lojas$?: Observable<Course[]>;
+
+  lojas20_00$?: Observable<Course[]>;
+  lojas20_30$?: Observable<Course[]>;
+  lojas21_00$?: Observable<Course[]>;
+  lojas22_00$?: Observable<Course[]>;
+  lojas23_45$?: Observable<Course[]>;
+  notOpened$?: Observable<Course[]>;
+
   displayedColumns = ['name', 'category', 'actions'];
+  lists: List[] = [];
 
   private coursesService = inject(CoursesService);
   private router = inject(Router);
@@ -51,9 +61,41 @@ export class CoursesComponent {
     this.refresh();
   }
 
+  refresh() {
+    this.lists = this.coursesService.getLists();
+    const values = this.lists.map(list => list.value);
+    // TODAS GET LINHAS
+    this.lojas$ = this.coursesService.list().pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os lojas.');
+        return of([]);
+      })
+    );
+
+    this.lojas20_00$ = this.coursesService.getProdutosPorCategoria(values[0]).pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os lojas.');
+        return of([]);
+      })
+    );
+    this.lojas20_30$ = this.coursesService.getProdutosPorCategoria(values[1]).pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os lojas.');
+        return of([]);
+      })
+    );
+    this.lojas21_00$ = this.coursesService.getProdutosPorCategoria(values[2]).pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os lojas.');
+        return of([]);
+      })
+    );
+
+  }
   onAdd() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
+
   onCopy(course: Course) {
     const courseText = `${course.name}`;
     navigator.clipboard.writeText(courseText).then(() => {
@@ -65,21 +107,6 @@ export class CoursesComponent {
 
   onEdit(course: Course) {
     this.router.navigate(['edit', course._id], { relativeTo: this.route });
-  }
-  refresh() {
-    this.courses20$ = this.coursesService.getProdutosPorCategoria('Eletros 18h:30').pipe(
-      catchError((error) => {
-        this.onError('');
-        return of([]);
-      })
-    );
-
-    this.courses$ = this.coursesService.list().pipe(
-      catchError((error) => {
-        this.onError('Erro ao carregar os cursos.');
-        return of([]);
-      })
-    );
   }
 
   onDelete(course: Course) {
