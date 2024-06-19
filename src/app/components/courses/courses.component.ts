@@ -18,6 +18,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { List } from '../../model/select';
+import { ThemePalette } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-courses',
@@ -34,11 +38,18 @@ import { List } from '../../model/select';
     ErrorComponent,
     MatButtonModule,
     MatIconModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSlideToggleModule
   ],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss',
 })
 export class CoursesComponent {
+  // toggle
+  color: ThemePalette = 'accent';
+  toggleStates: Map<number, boolean> = new Map();
+
 
   // TODAS GET LINHAS
   lojas$?: Observable<Course[]>;
@@ -96,10 +107,15 @@ export class CoursesComponent {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  onCopy(course: Course) {
+  onCopy(course: Course, courseId: number ) {
+    // Toggle
+    const currentState = this.toggleStates.get(courseId) || false;
+    this.toggleStates.set(courseId, !currentState);
+
+
     const courseText = `${course.name}`;
     navigator.clipboard.writeText(courseText).then(() => {
-      alert('Informações do curso copiadas para a área de transferência!');
+      console.log('Informações do curso copiadas para a área de transferência!');
     }).catch(err => {
       console.error('Erro ao copiar para a área de transferência: ', err);
     });
@@ -138,6 +154,11 @@ export class CoursesComponent {
         error: errorMsg,
       },
     });
+  }
+
+
+  isToggleChecked(courseId: number): boolean {
+    return this.toggleStates.get(courseId) || false;
   }
 }
 
