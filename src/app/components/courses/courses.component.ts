@@ -54,7 +54,7 @@ export class CoursesComponent {
   // TODAS GET LINHAS
   lojas$?: Observable<Course[]>;
 
-  lojas20_00$?: Observable<Course[]>;
+  lojas18_30$?: Observable<Course[]>;
   lojas20_30$?: Observable<Course[]>;
   lojas21_00$?: Observable<Course[]>;
   lojas22_00$?: Observable<Course[]>;
@@ -83,7 +83,7 @@ export class CoursesComponent {
       })
     );
 
-    this.lojas20_00$ = this.coursesService.getProdutosPorCategoria(values[0]).pipe(
+    this.lojas18_30$ = this.coursesService.getProdutosPorCategoria(values[0]).pipe(
       catchError((error) => {
         this.onError('Erro ao carregar os lojas.');
         return of([]);
@@ -96,6 +96,18 @@ export class CoursesComponent {
       })
     );
     this.lojas21_00$ = this.coursesService.getProdutosPorCategoria(values[2]).pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os lojas.');
+        return of([]);
+      })
+    );
+    this.lojas22_00$ = this.coursesService.getProdutosPorCategoria(values[3]).pipe(
+      catchError((error) => {
+        this.onError('Erro ao carregar os lojas.');
+        return of([]);
+      })
+    );
+    this.lojas23_45$ = this.coursesService.getProdutosPorCategoria(values[4]).pipe(
       catchError((error) => {
         this.onError('Erro ao carregar os lojas.');
         return of([]);

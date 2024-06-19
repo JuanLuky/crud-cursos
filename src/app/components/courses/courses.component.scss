@@ -1,12 +1,15 @@
 @import '_variables';
 
 .container {
-  margin: 0 auto;
-  margin-top: 40px;
+  margin: 40px auto;
   max-width: 1080px;
   width: 96%;
   border-radius: 5px !important;
   overflow: hidden;
+
+  mat-card {
+    margin-bottom: 40px;
+  }
 
   .table-container {
     th {
