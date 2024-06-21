@@ -9,6 +9,7 @@
 
   mat-card {
     margin-bottom: 40px;
+    gap: 20px;
   }
 
   .table-container {
@@ -31,7 +32,6 @@
 
   table {
     width: 100%;
-    margin-top: 10px;
   }
   .example-form {
     min-width: 300px;
@@ -43,7 +43,16 @@
   }
 
   .lojas-title {
-    background-color: #353535;
+    align-items: center;
+    justify-content: center;
+    background-color: #5a594f;
+    color: $gray-200;
+    font-size: 26px;
+  }
+  .lojas-300 {
+    align-items: center;
+    justify-content: center;
+    background-color: #cfa900;
     color: $gray-200;
     font-size: 18px;
   }

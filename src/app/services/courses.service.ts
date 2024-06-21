@@ -44,11 +44,11 @@ export class CoursesService {
 
     private lists: List[] = [
       { value: 'Eletros 18h:30' },
-      { value: 'Caminos e Carone 20h:30'},
+      { value: 'Caminos e Carone 20h:00'},
       { value: 'Caminos e Carone 21h:00'},
       { value: 'Lojas as 21h:00 / 22h:00' },
       { value: 'Lojas as 23h:45'},
-      { value: 'Não Inauguradas 22h:00'}
+      { value: 'Não Inauguradas 22h:00'},
     ];
 
     getLists(): List[] {
